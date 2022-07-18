@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from '@testing-library/react';
+import Clock from './components/Clock';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.useFakeTimers();
+jest.spyOn(global, 'setInterval');
+
+test('waits 1 second before update clock', () => {
+  render(<Clock />)
+
+  expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 1000);
 });
